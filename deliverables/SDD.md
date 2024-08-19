@@ -1,121 +1,404 @@
-# Software Design Document
+# MARCO - Software Design Document
 
-> Use this markdown file to create the report. For the submission print this document to a PDF, and upload it to iLearn. The maximum number of pages is 30.
-> Use the document structure below.
+## Title Page
 
-## Structure
+### Project Name
+**MARCO - Smart Shopping Assistant**
 
-### Title Page
+### Vision Statement
+**MARCO aims to revolutionize the grocery shopping experience by seamlessly integrating nutrition tracking, inventory management, and price comparison into a single platform. Our vision is to empower users to make healthier, smarter, and more cost-effective food choices while reducing food waste and simplifying meal planning.**
 
-- Project name, names of all team members
-- Vision statement
-  > This should be a new and fresh vision statement and not a copy of the SRS team's statement.
+---
 
-### System Design Document
+## System Design Document
 
-This will include the basic architecture of the system and the high-level strategic decisions. You need to include a description of the:
+### System Architecture
+### **Updated System Architecture**
 
-- System architecture
-- Storage/persistent data strategy
-- Noteworthy trade-offs and choices
-- Concurrent processes (if any) and how they will be coordinated
-- A package diagram showing the subsystems you will use
+The architecture of MARCO leverages modern, scalable, and efficient technologies to provide a seamless user experience. The system is designed with a focus on real-time data management, flexible API interactions, and a responsive user interface.
 
-### Data Definitions
+#### **System Architecture Components:**
 
-Create a table showing what data will need to be stored in your system. For each item give the name of the field/attribute/variable, its type, its meaning in the problem domain expressed in natural language, and an example of valid data.
+1. **Frontend (User Interface):**
+   - **Framework:** React.js (for web) and React Native (for mobile)
+   - **Styling:** Tailwind CSS for designing a consistent, responsive, and highly customizable user interface.
+   - **State Management:** Redux or React Context API for managing global application state.
+   - **GraphQL Client:** Apollo Client for handling GraphQL queries and mutations efficiently in the frontend.
 
-### Analysis and Design
+2. **Backend (API Layer):**
+   - **GraphQL API:** A GraphQL API layer built to interact with the Supabase backend. This allows the frontend to fetch specific data tailored to its needs, improving performance and reducing data overhead.
+   - **Authentication:** Managed via Supabase's built-in authentication services, which support various authentication methods (e.g., email/password, OAuth providers).
+   - **Real-Time Data Management:** Supabase's real-time capabilities are used to keep the user's fridge inventory, shopping lists, and other dynamic data synchronized across devices.
 
-#### Class Diagram
+3. **Database and Storage:**
+   - **Database:** Supabase (PostgreSQL) serves as the primary database, storing all user data, including profiles, inventory, nutritional information, and shopping lists.
+   - **Storage:** Supabase also provides storage solutions for handling media files, such as product images, scanned documents, or AR models used in the fridge management feature.
 
-You need to do an initial design of your system -- what basic objects should it have? And what are the methods associated with those objects? You will represent your design decisions in a class diagram. In a full plan, you need to make sure any classes or methods in any sequence diagrams have been included in the class diagram -- it might help you to draw some sequence diagrams to help you to decide what your class diagram should contain. Method signatures should be given. The diagram must include, as appropriate classes, attributes, associations, inheritance and/or aggregation (if applicable) and multiplicities.
+4. **External Integrations:**
+   - **Nutrition Data API:** Integrated with external nutrition data providers (e.g., USDA, FatSecret) via GraphQL to fetch and display detailed nutritional information about food products.
+   - **Price Comparison API:** Connected to various price comparison services (e.g., RapidAPI, PriceAPI) through GraphQL, enabling real-time price comparisons across multiple retailers.
+   - **Barcode/QR Code Scanning SDK:** Utilized for inventory management, allowing users to scan products directly into their fridge inventory.
+   - **Voice Assistant SDK:** Integrated with Alexa and Google Assistant to enable voice commands for adding items to shopping lists, checking inventory, and more.
 
-#### One or more State Diagrams for the more interesting objects in your design
+5. **Deployment:**
+   - **Frontend Deployment:** The frontend application is deployed using platforms like Vercel or Netlify, which offer seamless integration with React.js and Tailwind CSS, ensuring fast and reliable hosting.
+   - **Backend Deployment:** Supabase handles the backend infrastructure, providing managed services for the PostgreSQL database, authentication, and real-time APIs.
 
-State Diagrams: You are required to consider the relevant states of each object in your system and to submit state diagrams for those that have interesting states or complex behaviour. One way to measure if a state is interesting is to consider whether you need to test that state before performing a particular action or if the state changes after an action is performed. What is interesting will depend on the application.
+#### **System Architecture Diagram:**
 
-### Requirements Traceability Matrix
+```Mermaid
+graph TD
+    A[User Interface]
+    A1[React.js / React Native]
+    A2[Tailwind CSS Styling]
+    A3[Apollo GraphQL Client]
+    
+    A --> A1
+    A --> A2
+    A --> A3
+    
+    A2 -->|Applies Styling| A1
+    A3 -->|GraphQL Client| B[GraphQL API Layer]
+    
+    B --> |Interacts with| C[Supabase Backend]
+    C --> |Real-Time Data Sync & Storage| D1[PostgreSQL Database]
+    C --> D2[Authentication]
+    C --> D3[Media Storage]
 
-Requirements Traceability Matrix (RTM): Set up an RTM with the following columns:
+    B --> E[External Integrations]
+    E --> F1[Nutrition Data API]
+    E --> F2[Price Comparison API]
+    E --> F3[Barcode/QR Code Scanning SDK]
+    E --> F4[Voice Assistant SDK]
 
-- Requirement-ID (from SRS)
-- Use Cases
-- Classes
-- Methods
-- Packages
-- Build Number (kept blank at this stage)
 
-> There should be one row for each requirement. For this deliverable, just fill in the first five columns, since the last column (and usually a couple more after that which I've already deleted) are concerned with the design of the system.
 
-### List of design assumptions (if any)
+```
 
-This will help the reader to understand why you have done certain things. Please review the assumptions carefully before submission. (But note: A poor assumption should not be used as an excuse for poor design decisions.)
+### **Key Enhancements:**
+- **Supabase Integration:** Leveraging Supabase for real-time data synchronization, PostgreSQL database management, and authentication simplifies backend development and ensures scalability.
+- **GraphQL API:** The use of a GraphQL API enhances flexibility in data retrieval, allowing the frontend to request exactly the data it needs and nothing more, improving performance.
+- **Tailwind CSS:** Provides a utility-first approach to styling, enabling rapid UI development and ensuring a consistent, responsive design across all devices.
 
-### Test specifications
+This updated architecture is well-suited for modern web applications, ensuring that MARCO is scalable, maintainable, and capable of delivering a smooth and responsive user experience.
 
-Test Specifications should contain the following:
 
-- Test-case specifications, made up of test-case identifiers, and test data (input specifications and output specifications).
-  Acceptable documentation for Test Case Specifications would include:
-  - Test Case Identifier
-  - Test description
-  - Input specifications
-  - Output specifications
-- Test plans, including for example a test schedule, testing resources required, testing milestones and test deliverables. Test plans, covering scheduling and resourcing of all testing processes. Test plans can be more open format and should provide a description of how you would organise the actual testing of the Test Case Specifications that you've identified.
 
-> The test specification section should cover at least one-third of the report.
+### Storage/Persistent Data Strategy
+- **User Data:** Stored in MongoDB, including profiles, preferences, dietary goals, and shopping history.
+- **Inventory Data:** Also stored in MongoDB, tracking quantities, expiration dates, and nutritional content of each product in the user's fridge.
+- **Session Data:** Managed using Redis for quick access and to handle user sessions securely.
 
-### Project Management
+### Noteworthy Trade-offs and Choices
+- **Technology Stack:** We chose MongoDB for its flexibility in handling diverse data structures (like nutrition data and shopping lists). Node.js with Express.js was selected for its performance and ease of integration with frontend frameworks.
+- **Real-time vs. Batch Processing:** Real-time updates for inventory management and shopping list generation were prioritized to enhance user experience. However, some analytics functions are processed in batches to optimize performance.
+- **Mobile-First Design:** The UI/UX design prioritizes mobile users, given the nature of grocery shopping, though full functionality is maintained on web platforms.
 
-#### Minimal Viable Product
+### Concurrent Processes
+- **Real-Time Inventory Management:** Synchronization of fridge inventory updates with user actions, managed via WebSockets to ensure data consistency across devices.
+- **Background Price Comparison:** Regular updates on product prices across different stores, processed in the background to provide up-to-date information without affecting user experience.
 
-A description of the _minimal viable product_. This is a version of the product, that is suitable for the client, trusted customers, or early adopter to use for evaluation. Which of the requirements does it implement, and which part of the architecture needs to be in place?
+### Package Diagram
+```plaintext
++-----------------------------+
+|         User Interface       |
+|  (React.js/React Native)     |
++-----------------------------+
+            |
+            v
++-----------------------------+
+|        API Gateway          |
+|  (Node.js/Express.js)       |
++-----------------------------+
+            |
+            v
++-----------------------------+
+|      Inventory Management    |         +-------------------------+
+|    (Inventory Microservice)  |<------->|   Barcode/QR Service    |
++-----------------------------+          +-------------------------+
+            |
+            v
++-----------------------------+
+|  Nutrition & Macro Tracking  |         +-------------------------+
+|     (Nutrition Microservice) |<------->|   Nutrition Data API    |
++-----------------------------+          +-------------------------+
+            |
+            v
++-----------------------------+
+|   Price Comparison & Alerts  |         +-------------------------+
+|     (Price Comparison MS)    |<------->|   Price Comparison API  |
++-----------------------------+          +-------------------------+
+            |
+            v
++-----------------------------+
+|         Database             |
+|       (MongoDB, Redis)       |
++-----------------------------+
+```
 
-#### Milestones
+---
 
-A description of the main implementation milestones, in the order in which they should occur in the project. A milestone marks the end of a stage in the project when a version of the product can be reviewed as a whole.
+## Data Definitions
 
-#### Tasks
+| Field/Attribute | Type       | Meaning                                               | Example                    |
+|-----------------|------------|-------------------------------------------------------|----------------------------|
+| userId          | String     | Unique identifier for each user                        | "user12345"                |
+| userName        | String     | User's name                                            | "John Doe"                 |
+| email           | String     | User's email address                                   | "john.doe@example.com"     |
+| dietaryGoals    | Object     | User's dietary goals (e.g., daily calorie intake)      | {"calories": 2000, "protein": 150} |
+| productId       | String     | Unique identifier for each product                     | "product12345"             |
+| productName     | String     | Name of the product                                    | "Whole Milk"               |
+| macros          | Object     | Nutritional content (proteins, carbs, fats) of product | {"protein": 8, "carbs": 12, "fats": 8} |
+| quantity        | Number     | Quantity of the product in the fridge                  | 1.5 (liters)               |
+| expirationDate  | Date       | Expiration date of the product                         | "2024-08-30"               |
+| price           | Number     | Price of the product at a specific store               | 3.49 (USD)                 |
+| storeName       | String     | Name of the store offering the product                 | "Walmart"                  |
 
-Describe the main tasks that need to be completed, in the form of a table. The table should include
+---
 
-- An ID for the task
-- A description of the task
-- Dependencies, i.e. tasks that need to be completed before this task can start.
-- Effort. Since you do not know how, or even how many people work on the project, it does not make sense for this assignment to estimate workdays. Instead pick a suitable scale (S, M, L, XL or 1 to 5 stars or ...)
-- Milestone. Which milestone do they belong to?
+## Analysis and Design
 
-#### Risks
+### Class Diagram
+```plaintext
++---------------------+
+|       User          |
++---------------------+
+| -userId: String     |
+| -userName: String   |
+| -email: String      |
+| -dietaryGoals: Map  |
++---------------------+
+| +authenticate()     |
+| +updateProfile()    |
+| +getDietaryGoals()  |
+| +setDietaryGoals()  |
++---------------------+
 
-A table with the following types of risks
-- Organizational risks that come from changes in the organizational environment. Think of changing stakeholders or management, or a change of mind of stakeholders or management.
-- Requirements risks, that come from changes to the requirements, or wrong requirements, and the process of managing requirement changes.
-- Technology risks that come from the software or hardware technologies that are used by the system. **Include here parts of the system that you may need from the team that works on the other half of the system, or parts that you both depend on.**
-- Tools risks that come from the software tools and other support software used to develop the system.
+         |
+         v
 
-For each risk include
++---------------------+           +---------------------+
+|   FridgeInventory   |           |     FoodProduct      |
++---------------------+           +---------------------+
+| -inventoryId: String|<---------o|-productId: String    |
+| -userId: String     |  contains | -productName: String |
+| -products: List     |           | -macros: Map         |
+| -lastUpdated: Date  |           | -quantity: Float     |
++---------------------+           | -expirationDate: Date|
+| +addProduct()       |           +---------------------+
+| +removeProduct()    |
+| +updateProduct()    |
+| +getProductInfo()   |
++---------------------+
 
-- An ID
-- A description of the risk.
-- The probability of that risk happening (use an appropriate scale: low to high, or 0% to 100%, or ...)
-- The severity of the risk (use an appropriate scale: none to catastrophic, or 0 to 10, or ...)
-- Mitigation strategies. Suggest measures that can be taken to reduce the risk.
+         |
+         v
 
-> Since you do not know how many people work on the project, or what resources you may have, it does not make too much sense to talk about people risk, or estimation risk, yet. Furthermore, if something like a probability is unknown, is better to say that it is unknown, instead of making something up.
++---------------------+           +---------------------+
+|     ShoppingList    |           |      ShoppingItem    |
++---------------------+           +---------------------+
+| -listId: String     |<---------o|-itemId: String       |
+| -userId: String     |  contains | -productId: String   |
+| -items: List        |           | -quantity: Float     |
+| -createdDate: Date  |           | -price: Float        |
++---------------------+           +---------------------+
+| +generateList()     |
+| +addItem()          |
+| +removeItem()       |
+| +updateItem()       |
++---------------------+
 
-### Summary and Outlook
+         |
+         v
 
-Your famous final words.
++---------------------+           +---------------------+
+|  PriceComparison    |           |    ProductPrice      |
++---------------------+           +---------------------+
+| -compareId: String  |<---------o|-priceId: String      |
+| -productId: String  |  contains | -storeName: String   |
+| -prices: List       |           | -price: Float        |
+| -comparisonDate: Date|          | -availability: String|
++---------------------+           +---------------------+
+| +comparePrices()    |
+| +getBestPrice()     |
++---------------------+
+```
 
-### Appendices
+### State Diagrams
 
-- Log of interactions with stakeholders.
-- References.
-- Third-party-resources
+#### FoodProduct State Diagram
+```plaintext
++------------------+
+|      Created     |
++------------------+
+        |
+        v
++------------------+
+|   In Inventory   |
++------------------+
+        |
+        v
++------------------+
+|   Low Quantity   |
++------------------+
+        |
+        v
++------------------+
+|   Expired        |
++------------------+
+        |
+        v
++------------------+
+|   Removed        |
++------------------+
+```
 
-## Note
+---
 
-> Do not forget that we also expect you to complete an individual reflection on iLearn.
+## Requirements Traceability Matrix
 
+| Requirement-ID  | Use Cases            | Classes           | Methods                | Packages                |
+|-----------------|----------------------|-------------------|------------------------|-------------------------|
+| REQ-01          | User Authentication   | User              | authenticate()         | User Interface          |
+| REQ-02          | Manage Inventory      | FridgeInventory   | addProduct(), removeProduct() | Inventory Management  |
+| REQ-03          | Track Nutrition       | FoodProduct       | getProductInfo()       | Nutrition & Macro Tracking |
+| REQ-04          | Generate Shopping List| ShoppingList      | generateList()         | Shopping List Management |
+| REQ-05          | Price Comparison      | PriceComparison   | comparePrices()        | Price Comparison        |
+
+---
+
+## List of Design Assumptions
+
+1. **Mobile-First Approach:** The design prioritizes mobile usability, assuming the majority of users will access MARCO via smartphones.
+2. **Single User per Account:** The system is designed for individual users managing their own inventories and shopping lists, without shared accounts.
+3. **Real-Time Updates:** Inventory and price data are assumed to be updated in near real-time, relying on stable and frequent API calls.
+
+---
+
+## Test Specifications
+
+### Test Case Specifications
+
+| Test Case ID | Test Description                           | Input Specifications                       | Output Specifications                        |
+|--------------|--------------------------------------------|--------------------------------------------|----------------------------------------------|
+| TC-01        | User Authentication                        | Username, Password                         | Successful login, User profile loaded        |
+| TC-02        | Add Product to Inventory                   | Product Name, Quantity, Expiration Date    | Product added to inventory                   |
+| TC-03        | Generate
+
+ Shopping List                     | Fridge Inventory, Dietary Goals            | Customized shopping list generated           |
+| TC-04        | Compare Product Prices                     | Product Name                               | List of prices across different stores       |
+| TC-05        | Track Nutritional Intake                   | FoodProduct info, Daily Goals              | Updated daily intake summary                 |
+
+### Test Plan
+
+- **Test Schedule:**
+  - Week 1: User Interface Testing
+  - Week 2: Inventory Management Testing
+  - Week 3: Price Comparison and Nutrition Tracking Testing
+  - Week 4: Integration Testing and Final Bug Fixing
+
+- **Testing Resources Required:**
+  - Test devices (smartphones, tablets)
+  - Access to all APIs
+  - Testing tools (e.g., Postman, Selenium)
+
+- **Testing Milestones:**
+  - Completion of UI Testing
+  - Completion of Backend Functionality Testing
+  - Final Integration and Acceptance Testing
+
+- **Test Deliverables:**
+  - Test Case Reports
+  - Bug and Issue Logs
+  - Final Test Summary Report
+
+---
+
+## Project Management
+
+### Minimal Viable Product
+
+The Minimal Viable Product (MVP) for MARCO includes the following features:
+- User authentication and profile management
+- Basic fridge inventory management
+- Macro tracking and dietary goal setting
+- Shopping list generation based on inventory and dietary goals
+- Basic price comparison functionality
+
+These features allow early adopters to manage their kitchen inventory, track their nutrition, and generate shopping lists, providing immediate value and allowing for initial feedback collection.
+
+### Milestones
+
+1. **Milestone 1: System Setup and Basic Functionality**
+   - Setup of the development environment
+   - User authentication and profile management
+
+2. **Milestone 2: Inventory Management and Macro Tracking**
+   - Implementation of fridge inventory management
+   - Macro tracking and dietary goal setting
+
+3. **Milestone 3: Shopping List Generation and Price Comparison**
+   - Shopping list generation
+   - Price comparison functionality
+
+4. **Milestone 4: Integration and User Interface Finalization**
+   - Integration of all modules
+   - Finalization of UI/UX
+
+5. **Milestone 5: Testing and Deployment**
+   - Comprehensive testing of all features
+   - Deployment of the MVP
+
+### Tasks
+
+| Task ID | Task Description                         | Dependencies            | Effort | Milestone     |
+|---------|------------------------------------------|-------------------------|--------|---------------|
+| T1      | Set up development environment           | None                    | S      | Milestone 1   |
+| T2      | Implement user authentication            | T1                      | M      | Milestone 1   |
+| T3      | Develop fridge inventory management      | T2                      | M      | Milestone 2   |
+| T4      | Implement macro tracking                 | T3                      | L      | Milestone 2   |
+| T5      | Create shopping list generation feature  | T4                      | M      | Milestone 3   |
+| T6      | Implement price comparison functionality | T5                      | L      | Milestone 3   |
+| T7      | Finalize UI/UX design                    | T6                      | M      | Milestone 4   |
+| T8      | Conduct integration testing              | T7                      | L      | Milestone 5   |
+| T9      | Deploy MVP                               | T8                      | S      | Milestone 5   |
+
+### Risks
+
+| Risk ID | Description                                             | Probability | Severity | Mitigation Strategy                         |
+|---------|---------------------------------------------------------|-------------|----------|---------------------------------------------|
+| R1      | Changes in user requirements                            | Medium      | High     | Regular stakeholder meetings and feedback   |
+| R2      | API availability issues (e.g., price comparison, nutrition) | Low         | High     | Implement fallback mechanisms               |
+| R3      | Performance issues during peak usage                    | Medium      | Medium   | Optimize code and use scalable cloud services|
+| R4      | Dependency on external data accuracy (e.g., nutrition data) | Low         | Medium   | Cross-check with multiple data sources      |
+| R5      | Delays in integration of AR features                    | Medium      | Medium   | Prioritize AR as a later phase development  |
+
+---
+
+## Summary and Outlook
+
+MARCO aims to transform the grocery shopping experience by integrating smart shopping, nutrition tracking, and inventory management into a single, user-friendly platform. By focusing on the user's dietary goals and providing actionable insights, MARCO helps users make healthier and more cost-effective choices, while reducing food waste. As the project progresses, future developments may include expanded integrations with fitness apps, enhanced AI-driven recommendations, and support for additional smart kitchen devices.
+
+---
+
+## Appendices
+
+- **Log of Interactions with Stakeholders**
+  - Meeting on [Date]: Discussed core features and MVP scope with stakeholders.
+  - Meeting on [Date]: Reviewed system architecture and data strategy.
+  - Meeting on [Date]: Finalized UI/UX design considerations.
+
+- **References**
+  - [MongoDB Documentation](https://docs.mongodb.com/)
+  - [Node.js Documentation](https://nodejs.org/en/docs/)
+  - [React.js Documentation](https://reactjs.org/docs/getting-started.html)
+
+- **Third-party Resources**
+  - Nutrition API (USDA, FatSecret)
+  - Price Comparison API (RapidAPI, PriceAPI)
+  - Barcode/QR Code Scanning SDK (ZXing, Dynamsoft)
+  - Voice Assistant SDKs (Alexa, Google Assistant)
+  - AR SDKs (AR.js, Vuforia)
+
+---
 

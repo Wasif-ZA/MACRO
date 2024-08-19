@@ -1,25 +1,40 @@
-# Project B
+# Project: MARCO
 
-## Introdcution
-You have been approached by a client who has an idea for a system they want to develop that would facilitate and promote reusable coffee cups, without the user having to carry and clean their cup themselves. The company has developed bio-degradable RFID tags and has partnered with a company that produces high-quality reusable coffee cups. They developed a coffee cup with an embedded RFID tag that can be individually tracked using off-the-shelf RFID scanners. 
+## Introduction
+MARCO is a smart shopping assistant designed to help users make informed purchasing decisions while tracking the nutritional content of food products and managing their kitchen inventory. The system aims to simplify the shopping experience by offering personalized shopping lists, price comparisons, and real-time inventory management.
 
-## The problem as they see it
+## The Problem
+Modern consumers are often overwhelmed by the variety of food products available and the need to manage their dietary goals. Additionally, keeping track of what’s in the fridge, when products expire, and how much is left can be a hassle. Users need a system that not only helps them make healthy and cost-effective purchasing decisions but also tracks their nutrition intake and manages their kitchen inventory to reduce food waste.
 
-The company has a mature product - a trackable reusable coffee cup - but would like to extend its business into using this technology to provide a coffee cup swap service to local and independent coffee shops. The idea is that people can "buy a cup", which is actually a subscription, which entitles them to the use of a coffee cup at any of the participating coffee shops, and drop it at any of the participating coffee shops. Or at collection points that will be placed in strategically selected points, such as train stations, shopping centres, and libraries. There is no need to take the cup home or clean it. You can take your coffee, have it while you go shopping or travel by train, and leave it at another coffee shop or collection point.
+## The Idea
+The MARCO system will track each food product’s macros (proteins, carbs, fats) and monitor the quantities of products left in the fridge. Users can generate shopping lists based on their dietary goals and inventory, compare prices across stores, and receive alerts when products are running low or nearing expiration. The system will also offer personalized nutrition advice and suggest recipes based on available ingredients.
 
-For this product, they like to develop an app that allows users to manage and view their subscriptions. The app can be used at participating coffee shops to use a set number of coffee cups. The coffee shop owner would have to scan both the cup and the app when a cup is "borrowed", and the cup when it is returned. They are open to suggestions on how this "borrowing" and "returning" would work in practice, and how a user would buy their first cup.
+## Core Features
 
-The company has an agreement with a university to start a pilot project on its campus, and all coffee shops on campus signed on to the project. The client would employ a sales team to oversee the current subscriptions. They would need an up-to-date overview of how many cups were sold, and which user uses has borrowed how many cups. It should include a system to prevent abuse by users.
+1. **Price Comparison and Review Analysis**
+   - Helps users compare prices across different stores and online platforms.
+   - Analyzes product reviews and suggests the best options based on user preferences.
 
-## The idea
+2. **Macro Tracking and Nutrition Information**
+   - Tracks the nutritional content (macros like proteins, carbs, fats) of food products as users add them to their shopping lists or buy them.
+   - Allows users to set dietary goals (e.g., daily calorie intake, protein targets) and monitors how the purchased foods contribute to these goals.
 
-The idea is to implement a system and an app that tracks cups and manages subscriptions. The sales team should furthermore have up-to-date information. e.g. it should also allow them to identify users who borrow but do not return. It should include a subsystem, that permits coffee shops to create their own loyalty program for coffee sales, e.g. buy 6 coffees, get one free.
+3. **Fridge Inventory Management**
+   - Automatically updates the quantity of each product in the fridge after shopping.
+   - Users can manually or via scanning (using barcodes or QR codes) update the inventory when consuming products.
+   - Provides alerts when products are running low or nearing their expiration date, and suggests recipes using remaining ingredients.
 
-## Your responsibility
+4. **Shopping List and Replenishment Notifications**
+   - Generates shopping lists based on what’s left in the fridge, the user’s dietary goals, and upcoming meals.
+   - Sends notifications when it’s time to restock certain items or when there are deals on frequently bought products.
 
-Your team is in contact with a group of stakeholders. Your task is to plan the software requirements for the new system – which may or may not require the deployment of new hardware.
+5. **Integration with Meal Planning**
+   - Sync with a meal planning tool to automatically generate shopping lists based on planned meals.
+   - Suggest recipes based on current inventory to minimize waste.
 
-Note, that this project is related to the other project. Be aware that you develop requirements for your project, and not for the other project, or both projects. That is why it is important to define the scope of a project early. And stick to it.
+6. **Voice Assistant Integration**
+   - Users can add items to their shopping list, check inventory, or inquire about nutritional information using voice commands.
 
-> Check regularly in Ilearn if there are announcements with respect to this assignment.
+7. **Augmented Reality (AR) for Fridge Management**
+   - Use augmented reality (AR) to visualize what’s in the fridge, showing quantities and suggesting recipes based on what’s available.
 
