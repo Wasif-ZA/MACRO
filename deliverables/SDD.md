@@ -46,34 +46,7 @@ The architecture of MARCO leverages modern, scalable, and efficient technologies
 
 #### **System Architecture Diagram:**
 
-```Mermaid
-graph TD
-    A[User Interface]
-    A1[React.js / React Native]
-    A2[Tailwind CSS Styling]
-    A3[Apollo GraphQL Client]
-    
-    A --> A1
-    A --> A2
-    A --> A3
-    
-    A2 -->|Applies Styling| A1
-    A3 -->|GraphQL Client| B[GraphQL API Layer]
-    
-    B --> |Interacts with| C[Supabase Backend]
-    C --> |Real-Time Data Sync & Storage| D1[PostgreSQL Database]
-    C --> D2[Authentication]
-    C --> D3[Media Storage]
 
-    B --> E[External Integrations]
-    E --> F1[Nutrition Data API]
-    E --> F2[Price Comparison API]
-    E --> F3[Barcode/QR Code Scanning SDK]
-    E --> F4[Voice Assistant SDK]
-
-
-
-```
 
 ### **Key Enhancements:**
 - **Supabase Integration:** Leveraging Supabase for real-time data synchronization, PostgreSQL database management, and authentication simplifies backend development and ensures scalability.
