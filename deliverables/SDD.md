@@ -8,7 +8,6 @@
 ### Vision Statement
 **MARCO aims to revolutionize the grocery shopping experience by seamlessly integrating nutrition tracking, inventory management, and price comparison into a single platform. Our vision is to empower users to make healthier, smarter, and more cost-effective food choices while reducing food waste and simplifying meal planning.**
 
----
 
 ## System Design Document
 
@@ -72,44 +71,7 @@ This updated architecture is well-suited for modern web applications, ensuring t
 - **Background Price Comparison:** Regular updates on product prices across different stores, processed in the background to provide up-to-date information without affecting user experience.
 
 ### Package Diagram
-```plaintext
-+-----------------------------+
-|         User Interface       |
-|  (React.js/React Native)     |
-+-----------------------------+
-            |
-            v
-+-----------------------------+
-|        API Gateway          |
-|  (Node.js/Express.js)       |
-+-----------------------------+
-            |
-            v
-+-----------------------------+
-|      Inventory Management    |         +-------------------------+
-|    (Inventory Microservice)  |<------->|   Barcode/QR Service    |
-+-----------------------------+          +-------------------------+
-            |
-            v
-+-----------------------------+
-|  Nutrition & Macro Tracking  |         +-------------------------+
-|     (Nutrition Microservice) |<------->|   Nutrition Data API    |
-+-----------------------------+          +-------------------------+
-            |
-            v
-+-----------------------------+
-|   Price Comparison & Alerts  |         +-------------------------+
-|     (Price Comparison MS)    |<------->|   Price Comparison API  |
-+-----------------------------+          +-------------------------+
-            |
-            v
-+-----------------------------+
-|         Database             |
-|       (MongoDB, Redis)       |
-+-----------------------------+
-```
 
----
 
 ## Data Definitions
 
@@ -132,101 +94,12 @@ This updated architecture is well-suited for modern web applications, ensuring t
 ## Analysis and Design
 
 ### Class Diagram
-```plaintext
-+---------------------+
-|       User          |
-+---------------------+
-| -userId: String     |
-| -userName: String   |
-| -email: String      |
-| -dietaryGoals: Map  |
-+---------------------+
-| +authenticate()     |
-| +updateProfile()    |
-| +getDietaryGoals()  |
-| +setDietaryGoals()  |
-+---------------------+
 
-         |
-         v
-
-+---------------------+           +---------------------+
-|   FridgeInventory   |           |     FoodProduct      |
-+---------------------+           +---------------------+
-| -inventoryId: String|<---------o|-productId: String    |
-| -userId: String     |  contains | -productName: String |
-| -products: List     |           | -macros: Map         |
-| -lastUpdated: Date  |           | -quantity: Float     |
-+---------------------+           | -expirationDate: Date|
-| +addProduct()       |           +---------------------+
-| +removeProduct()    |
-| +updateProduct()    |
-| +getProductInfo()   |
-+---------------------+
-
-         |
-         v
-
-+---------------------+           +---------------------+
-|     ShoppingList    |           |      ShoppingItem    |
-+---------------------+           +---------------------+
-| -listId: String     |<---------o|-itemId: String       |
-| -userId: String     |  contains | -productId: String   |
-| -items: List        |           | -quantity: Float     |
-| -createdDate: Date  |           | -price: Float        |
-+---------------------+           +---------------------+
-| +generateList()     |
-| +addItem()          |
-| +removeItem()       |
-| +updateItem()       |
-+---------------------+
-
-         |
-         v
-
-+---------------------+           +---------------------+
-|  PriceComparison    |           |    ProductPrice      |
-+---------------------+           +---------------------+
-| -compareId: String  |<---------o|-priceId: String      |
-| -productId: String  |  contains | -storeName: String   |
-| -prices: List       |           | -price: Float        |
-| -comparisonDate: Date|          | -availability: String|
-+---------------------+           +---------------------+
-| +comparePrices()    |
-| +getBestPrice()     |
-+---------------------+
-```
 
 ### State Diagrams
 
 #### FoodProduct State Diagram
-```plaintext
-+------------------+
-|      Created     |
-+------------------+
-        |
-        v
-+------------------+
-|   In Inventory   |
-+------------------+
-        |
-        v
-+------------------+
-|   Low Quantity   |
-+------------------+
-        |
-        v
-+------------------+
-|   Expired        |
-+------------------+
-        |
-        v
-+------------------+
-|   Removed        |
-+------------------+
-```
 
----
 
 ## Requirements Traceability Matrix
 
