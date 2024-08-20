@@ -1,4 +1,4 @@
-Here's an updated README with a "Required Installations" section:
+
 
 # MARCO - Smart Shopping Assistant
 
