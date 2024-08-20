@@ -225,7 +225,7 @@ These features allow early adopters to manage their kitchen inventory, track the
 
 MARCO aims to transform the grocery shopping experience by integrating smart shopping, nutrition tracking, and inventory management into a single, user-friendly platform. By focusing on the user's dietary goals and providing actionable insights, MARCO helps users make healthier and more cost-effective choices, while reducing food waste. As the project progresses, future developments may include expanded integrations with fitness apps, enhanced AI-driven recommendations, and support for additional smart kitchen devices.
 
----
+
 
 ## Appendices
 
