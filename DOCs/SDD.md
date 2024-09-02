@@ -8,7 +8,6 @@
 ### Vision Statement
 **MARCO aims to revolutionize the grocery shopping experience by seamlessly integrating nutrition tracking, inventory management, and price comparison into a single platform. Our vision is to empower users to make healthier, smarter, and more cost-effective food choices while reducing food waste and simplifying meal planning.**
 
----
 
 ## System Design Document
 
@@ -46,34 +45,7 @@ The architecture of MARCO leverages modern, scalable, and efficient technologies
 
 #### **System Architecture Diagram:**
 
-```Mermaid
-graph TD
-    A[User Interface]
-    A1[React.js / React Native]
-    A2[Tailwind CSS Styling]
-    A3[Apollo GraphQL Client]
-    
-    A --> A1
-    A --> A2
-    A --> A3
-    
-    A2 -->|Applies Styling| A1
-    A3 -->|GraphQL Client| B[GraphQL API Layer]
-    
-    B --> |Interacts with| C[Supabase Backend]
-    C --> |Real-Time Data Sync & Storage| D1[PostgreSQL Database]
-    C --> D2[Authentication]
-    C --> D3[Media Storage]
 
-    B --> E[External Integrations]
-    E --> F1[Nutrition Data API]
-    E --> F2[Price Comparison API]
-    E --> F3[Barcode/QR Code Scanning SDK]
-    E --> F4[Voice Assistant SDK]
-
-
-
-```
 
 
 
@@ -93,44 +65,7 @@ graph TD
 - **Background Price Comparison:** Regular updates on product prices across different stores, processed in the background to provide up-to-date information without affecting user experience.
 
 ### Package Diagram
-```plaintext
-+-----------------------------+
-|         User Interface       |
-|  (React.js/React Native)     |
-+-----------------------------+
-            |
-            v
-+-----------------------------+
-|        API Gateway          |
-|  (Node.js/Express.js)       |
-+-----------------------------+
-            |
-            v
-+-----------------------------+
-|      Inventory Management    |         +-------------------------+
-|    (Inventory Microservice)  |<------->|   Barcode/QR Service    |
-+-----------------------------+          +-------------------------+
-            |
-            v
-+-----------------------------+
-|  Nutrition & Macro Tracking  |         +-------------------------+
-|     (Nutrition Microservice) |<------->|   Nutrition Data API    |
-+-----------------------------+          +-------------------------+
-            |
-            v
-+-----------------------------+
-|   Price Comparison & Alerts  |         +-------------------------+
-|     (Price Comparison MS)    |<------->|   Price Comparison API  |
-+-----------------------------+          +-------------------------+
-            |
-            v
-+-----------------------------+
-|         Database             |
-|       (MongoDB, Redis)       |
-+-----------------------------+
-```
 
----
 
 ## Data Definitions
 
@@ -153,101 +88,12 @@ graph TD
 ## Analysis and Design
 
 ### Class Diagram
-```plaintext
-+---------------------+
-|       User          |
-+---------------------+
-| -userId: String     |
-| -userName: String   |
-| -email: String      |
-| -dietaryGoals: Map  |
-+---------------------+
-| +authenticate()     |
-| +updateProfile()    |
-| +getDietaryGoals()  |
-| +setDietaryGoals()  |
-+---------------------+
 
-         |
-         v
-
-+---------------------+           +---------------------+
-|   FridgeInventory   |           |     FoodProduct      |
-+---------------------+           +---------------------+
-| -inventoryId: String|<---------o|-productId: String    |
-| -userId: String     |  contains | -productName: String |
-| -products: List     |           | -macros: Map         |
-| -lastUpdated: Date  |           | -quantity: Float     |
-+---------------------+           | -expirationDate: Date|
-| +addProduct()       |           +---------------------+
-| +removeProduct()    |
-| +updateProduct()    |
-| +getProductInfo()   |
-+---------------------+
-
-         |
-         v
-
-+---------------------+           +---------------------+
-|     ShoppingList    |           |      ShoppingItem    |
-+---------------------+           +---------------------+
-| -listId: String     |<---------o|-itemId: String       |
-| -userId: String     |  contains | -productId: String   |
-| -items: List        |           | -quantity: Float     |
-| -createdDate: Date  |           | -price: Float        |
-+---------------------+           +---------------------+
-| +generateList()     |
-| +addItem()          |
-| +removeItem()       |
-| +updateItem()       |
-+---------------------+
-
-         |
-         v
-
-+---------------------+           +---------------------+
-|  PriceComparison    |           |    ProductPrice      |
-+---------------------+           +---------------------+
-| -compareId: String  |<---------o|-priceId: String      |
-| -productId: String  |  contains | -storeName: String   |
-| -prices: List       |           | -price: Float        |
-| -comparisonDate: Date|          | -availability: String|
-+---------------------+           +---------------------+
-| +comparePrices()    |
-| +getBestPrice()     |
-+---------------------+
-```
 
 ### State Diagrams
 
 #### FoodProduct State Diagram
-```plaintext
-+------------------+
-|      Created     |
-+------------------+
-        |
-        v
-+------------------+
-|   In Inventory   |
-+------------------+
-        |
-        v
-+------------------+
-|   Low Quantity   |
-+------------------+
-        |
-        v
-+------------------+
-|   Expired        |
-+------------------+
-        |
-        v
-+------------------+
-|   Removed        |
-+------------------+
-```
 
----
 
 ## Requirements Traceability Matrix
 
@@ -373,7 +219,7 @@ These features allow early adopters to manage their kitchen inventory, track the
 
 MARCO aims to transform the grocery shopping experience by integrating smart shopping, nutrition tracking, and inventory management into a single, user-friendly platform. By focusing on the user's dietary goals and providing actionable insights, MARCO helps users make healthier and more cost-effective choices, while reducing food waste. As the project progresses, future developments may include expanded integrations with fitness apps, enhanced AI-driven recommendations, and support for additional smart kitchen devices.
 
----
+
 
 ## Appendices
 
