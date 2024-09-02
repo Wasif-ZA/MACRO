@@ -75,12 +75,6 @@ graph TD
 
 ```
 
-### **Key Enhancements:**
-- **Supabase Integration:** Leveraging Supabase for real-time data synchronization, PostgreSQL database management, and authentication simplifies backend development and ensures scalability.
-- **GraphQL API:** The use of a GraphQL API enhances flexibility in data retrieval, allowing the frontend to request exactly the data it needs and nothing more, improving performance.
-- **Tailwind CSS:** Provides a utility-first approach to styling, enabling rapid UI development and ensuring a consistent, responsive design across all devices.
-
-This updated architecture is well-suited for modern web applications, ensuring that MARCO is scalable, maintainable, and capable of delivering a smooth and responsive user experience.
 
 
 
